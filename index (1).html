@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorteio Lilika Cosméticos | Concorra a uma cesta de cosméticos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rose: #C97C86;
+    --rose-deep: #A85A67;
+    --blush: #FBEAEC;
+    --gold: #D9A441;
+    --navy: #0E2A47;
+    --cream: #FBF6F2;
+    --ink: #2B2026;
+    --muted: #7A6A6E;
+    --white: #FFFFFF;
+    --radius: 16px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Manrope', sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.5;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    margin:0;
+    color:var(--rose-deep);
+  }
+  .wrap{
+    max-width:520px;
+    margin:0 auto;
+    padding:0 20px 60px;
+  }
+  header.top{
+    background:var(--rose);
+    padding:20px 20px 18px;
+    text-align:center;
+  }
+  .eyebrow{
+    font-family:'Manrope', sans-serif;
+    font-weight:800;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:13px;
+    color:var(--white);
+  }
+  .eyebrow-sub{
+    color:#FDE9EA;
+    font-size:11.5px;
+    letter-spacing:.06em;
+    margin-top:4px;
+  }
+  .partner-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:10px;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.4);
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:11px;
+    color:var(--white);
+    font-weight:700;
+  }
+  .hero{
+    padding:36px 0 4px;
+    text-align:center;
+  }
+  .hero .kicker-emoji{
+    font-size:36px;
+  }
+  .hero h1{
+    font-size:28px;
+    font-weight:600;
+    line-height:1.22;
+    margin-top:10px;
+  }
+  .hero p{
+    color:var(--muted);
+    font-size:15.5px;
+    margin-top:14px;
+    padding:0 4px;
+  }
+  .date-pill{
+    display:inline-block;
+    margin-top:18px;
+    background:var(--white);
+    border:1.5px solid var(--gold);
+    color:var(--rose-deep);
+    font-weight:700;
+    font-size:13px;
+    padding:8px 16px;
+    border-radius:999px;
+  }
+  .prize-card{
+    margin-top:26px;
+    background:var(--white);
+    border-radius:var(--radius);
+    padding:18px 20px;
+    box-shadow:0 10px 30px rgba(169,90,103,.10);
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .prize-card .emoji{
+    font-size:34px;
+    flex-shrink:0;
+  }
+  .prize-card h3{
+    font-size:15.5px;
+    color:var(--rose-deep);
+  }
+  .prize-card p{
+    margin:4px 0 0;
+    font-size:13px;
+    color:var(--muted);
+  }
+  form{
+    margin-top:24px;
+    background:var(--white);
+    border-radius:var(--radius);
+    padding:26px 20px 24px;
+    box-shadow:0 10px 30px rgba(169,90,103,.10);
+  }
+  label.field-label{
+    display:block;
+    font-weight:700;
+    font-size:13.5px;
+    color:var(--rose-deep);
+    margin:0 0 6px;
+  }
+  .field{
+    margin-bottom:18px;
+  }
+  input[type="text"],
+  input[type="tel"]{
+    width:100%;
+    padding:13px 14px;
+    border-radius:10px;
+    border:1.5px solid #EAD9DB;
+    font-size:15px;
+    font-family:'Manrope', sans-serif;
+    background:#FDF8F7;
+    color:var(--ink);
+    transition:border-color .15s ease;
+  }
+  input:focus{
+    outline:none;
+    border-color:var(--gold);
+    background:var(--white);
+  }
+  input:focus-visible{
+    outline:2px solid var(--rose-deep);
+    outline-offset:1px;
+  }
+  button.submit{
+    width:100%;
+    margin-top:6px;
+    padding:16px;
+    border:none;
+    border-radius:12px;
+    background:var(--rose);
+    color:var(--white);
+    font-family:'Manrope', sans-serif;
+    font-weight:800;
+    font-size:15.5px;
+    letter-spacing:.01em;
+    cursor:pointer;
+    transition:filter .15s ease, transform .1s ease;
+  }
+  button.submit:hover{filter:brightness(0.95);}
+  button.submit:active{transform:scale(.99);}
+  button.submit:disabled{
+    opacity:.7;
+    cursor:default;
+  }
+  .objective-heading{
+    font-weight:700;
+    font-size:13.5px;
+    color:var(--rose-deep);
+    margin:6px 0 10px;
+  }
+  .objective-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:6px;
+  }
+  .obj-card{
+    position:relative;
+  }
+  .obj-card input{
+    position:absolute;
+    opacity:0;
+    inset:0;
+    width:100%;
+    height:100%;
+    cursor:pointer;
+    margin:0;
+  }
+  .obj-card label{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    text-align:center;
+    border:1.5px solid #EAD9DB;
+    border-radius:12px;
+    padding:14px 8px;
+    background:#FDF8F7;
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink);
+    transition:border-color .15s ease, background .15s ease, transform .1s ease;
+    height:100%;
+  }
+  .obj-card .emoji{
+    font-size:22px;
+  }
+  .obj-card input:checked + label{
+    border-color:var(--gold);
+    background:var(--blush);
+    color:var(--rose-deep);
+  }
+  .obj-card input:focus-visible + label{
+    outline:2px solid var(--rose-deep);
+    outline-offset:2px;
+  }
+  .error-msg{
+    display:none;
+    color:#B3401E;
+    font-size:12.5px;
+    font-weight:600;
+    margin-top:6px;
+  }
+  .error-msg.show{display:block;}
+  .privacy-note{
+    text-align:center;
+    font-size:12px;
+    color:var(--muted);
+    margin-top:14px;
+    padding:0 8px;
+  }
+  .footer-note{
+    text-align:center;
+    margin-top:30px;
+    font-size:12px;
+    color:var(--muted);
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+  <header class="top">
+    <div class="eyebrow">LILIKA COSMÉTICOS</div>
+    <div class="eyebrow-sub">Sorteio especial</div>
+    <div class="partner-badge">🤝 Em parceria com Ademicon Sorocaba</div>
+  </header>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="kicker-emoji">🎁</div>
+      <h1>Uma cesta de cosméticos pode ser sua.</h1>
+      <p>Preencha seus dados abaixo e concorra à cesta de cosméticos Lilika. É rápido e gratuito.</p>
+      <div class="date-pill">📅 Participações até 21/08/2026</div>
+    </div>
+
+    <div class="prize-card">
+      <div class="emoji">💄</div>
+      <div>
+        <h3>Cesta de cosméticos Lilika</h3>
+        <p>O resultado será divulgado em parceria com a loja Lilika Cosméticos.</p>
+      </div>
+    </div>
+
+    <form id="sorteioForm" novalidate>
+      <div class="field">
+        <label class="field-label" for="nome">Nome completo</label>
+        <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="whatsapp">WhatsApp</label>
+        <input type="tel" id="whatsapp" name="whatsapp" placeholder="(15) 99999-9999" required>
+      </div>
+
+      <div class="field">
+        <div class="objective-heading">Qual é o seu próximo objetivo?</div>
+        <div class="objective-grid">
+          <div class="obj-card">
+            <input type="radio" name="objetivo" id="obj1" value="Comprar um imóvel" required>
+            <label for="obj1"><span class="emoji">🏡</span>Comprar um imóvel</label>
+          </div>
+          <div class="obj-card">
+            <input type="radio" name="objetivo" id="obj2" value="Comprar um veículo">
+            <label for="obj2"><span class="emoji">🚗</span>Comprar um veículo</label>
+          </div>
+          <div class="obj-card">
+            <input type="radio" name="objetivo" id="obj3" value="Guardar dinheiro para o futuro">
+            <label for="obj3"><span class="emoji">💰</span>Guardar dinheiro para o futuro</label>
+          </div>
+          <div class="obj-card">
+            <input type="radio" name="objetivo" id="obj4" value="Fazer uma viagem">
+            <label for="obj4"><span class="emoji">✈️</span>Fazer uma viagem</label>
+          </div>
+          <div class="obj-card">
+            <input type="radio" name="objetivo" id="obj5" value="Construir ou reformar um imóvel">
+            <label for="obj5"><span class="emoji">🏗️</span>Construir ou reformar um imóvel</label>
+          </div>
+          <div class="obj-card">
+            <input type="radio" name="objetivo" id="obj6" value="Ainda estou avaliando as possibilidades">
+            <label for="obj6"><span class="emoji">💼</span>Ainda estou avaliando</label>
+          </div>
+        </div>
+        <div class="error-msg" id="objError">Selecione uma opção para continuar.</div>
+      </div>
+
+      <button type="submit" class="submit" id="submitBtn">Quero concorrer</button>
+      <div class="privacy-note">Seus dados são usados apenas para contato sobre o sorteio. Sem spam.</div>
+    </form>
+
+    <div class="footer-note">Lilika Cosméticos &times; Ademicon Sorocaba</div>
+  </div>
+
+<script>
+  // ⚠️ COLE AQUI A URL DO SEU APPS SCRIPT (a mesma usada no funil da Ademicon)
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-dq65V8ptecDiMlcge5pvpK4y5j7E_ifcZlBRrxxoDZKsya5871Lo80rAiZTlePTt/exec";
+
+  function getOrigem(){
+    const params = new URLSearchParams(window.location.search);
+    const raw = (params.get('origem') || params.get('utm_source') || 'instagram').toLowerCase();
+    const map = {
+      instagram: 'Instagram',
+      tiktok: 'TikTok',
+      facebook: 'Facebook',
+      whatsapp: 'WhatsApp',
+      youtube: 'YouTube'
+    };
+    return map[raw] || (raw.charAt(0).toUpperCase() + raw.slice(1));
+  }
+
+  const form = document.getElementById('sorteioForm');
+  const submitBtn = document.getElementById('submitBtn');
+
+  const objError = document.getElementById('objError');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const objetivo = form.querySelector('input[name="objetivo"]:checked');
+    if(!objetivo){
+      objError.classList.add('show');
+      form.querySelector('.objective-grid').scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+    objError.classList.remove('show');
+
+    if(!form.checkValidity()){
+      form.reportValidity();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+
+    const data = new FormData();
+    data.append('formulario', 'sorteio_lilika'); // identifica esse funil pro script
+    data.append('nome', document.getElementById('nome').value.trim());
+    data.append('whatsapp', document.getElementById('whatsapp').value.trim());
+    data.append('objetivo', objetivo.value);
+    data.append('origem', getOrigem());
+    data.append('dataHora', new Date().toLocaleString('pt-BR', {timeZone:'America/Sao_Paulo'}));
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: data
+    })
+    .catch(function(err){
+      console.log('Aviso: não foi possível confirmar o envio (isso é esperado com no-cors).', err);
+    })
+    .finally(function(){
+      window.location.href = 'obrigado.html';
+    });
+  });
+</script>
+
+</body>
+</html>
